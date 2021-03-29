@@ -1,17 +1,16 @@
 pipeline {
-    agent { docker { image 'alpine' } }
+    agent none
     stages {
-        stage('build') {
+        stage('build alpine stage 1') {
+            agent { docker { image 'alpine' } }
             steps {
                 sh 'echo now this is epic'
             }
         }
-    }
-    agent { docker { image 'alpine' } }
-    stages {
-        stage('build') {
+        stage('build debian stage 2') {
+            agent { docker { image 'debian' } }
             steps {
-                sh 'second pipeline test'
+                sh 'echo gaming gaming gaming gaming gmain g??????'
             }
         }
     }
