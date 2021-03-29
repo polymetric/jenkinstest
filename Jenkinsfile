@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'echo engineer gaming'
+                sh 'echo now this is epic'
             }
         }
     }
