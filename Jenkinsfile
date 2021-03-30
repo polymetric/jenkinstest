@@ -9,11 +9,11 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            archiveArtifacts artifacts: 'gaming', fingerprint: true
-            deleteDir()
-        }
-    }
+//    post {
+//        always {
+//            archiveArtifacts artifacts: 'gaming', fingerprint: true
+//            deleteDir()
+//        }
+//    }
 }
 
