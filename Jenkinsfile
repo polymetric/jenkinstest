@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('buildy mcbuildscript') {
             agent { docker { image 'alpine' } }
@@ -11,8 +11,10 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'gaming', fingerprint: true
-            deleteDir()
+            node(null) {
+                archiveArtifacts artifacts: 'gaming', fingerprint: true
+                deleteDir()
+            }
         }
     }
 }
