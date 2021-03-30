@@ -6,11 +6,7 @@ pipeline {
           stage('build linux-x64') {
 //              agent { docker { image 'dockcross/linux-x64' } }
               steps {
-                  sh 'touch linux64'
-                  sh 'mkdir -p build'
-                  //sh '$CC main.c -o build/gaming'
-                  sh 'touch build/gaming'
-                  sh 'ls build'
+                  sh 'echo beef gaming > build/gaming'
               }
           }
 //                stage('build windows-x64') {
