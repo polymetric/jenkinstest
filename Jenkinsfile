@@ -12,15 +12,15 @@ pipeline {
                         sh 'ls build'
                     }
                 }
-                stage('build windows-x64') {
-                    agent { docker { image 'dockcross/windows-static-x64' } }
-                    steps {
-                        sh 'touch win64'
-                        sh 'mkdir -p build'
-                        sh '$CC main.c -o build/gaming.exe'
-                        sh 'ls build'
-                    }
-                }
+//                stage('build windows-x64') {
+//                    agent { docker { image 'dockcross/windows-static-x64' } }
+//                    steps {
+//                        sh 'touch win64'
+//                        sh 'mkdir -p build'
+//                        sh '$CC main.c -o build/gaming.exe'
+//                        sh 'ls build'
+//                    }
+//                }
             }
         }
         stage('why isnt it owrkingijgngn') {
