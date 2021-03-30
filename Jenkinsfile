@@ -24,12 +24,6 @@ pipeline {
 //                }
 //            }
 //        }
-        stage('why isnt it owrkingijgngn') {
-            agent any
-            steps {
-                sh 'ls build'
-            }
-        }
     }
 
     post {
