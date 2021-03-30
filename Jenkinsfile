@@ -4,17 +4,15 @@ pipeline {
         stage('build') {
             parallel {
                 stage('build linux x64') {
-                    agent { docker { image 'dockcross/linux-x64' } }
                     steps {
-                        sh 'mkdir -p build'
-                        sh 'cc main.c -o build/gaming'
+                        sh 'mkdir -p build/'
+                        sh 'dockcross-linux-x64 bash -c \'$CC main.c -o build/main\''
                     }
                 }
                 stage('build windows x64') {
-                    agent { docker { image 'dockcross/windows-static-x64' } }
                     steps {
-                        sh 'mkdir -p build'
-                        sh 'x86_64-w64-mingw32.static-gcc main.c -o build/gaming.exe'
+                        sh 'mkdir -p build/'
+                        sh 'dockcross-windows-static-x64 bash -c \'$CC main.c -o build/main\''
                     }
                 }
             }
