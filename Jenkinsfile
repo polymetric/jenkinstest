@@ -25,6 +25,7 @@ pipeline {
 
     post {
         always {
+            sh 'ls'
             archiveArtifacts artifacts: 'build/gaming', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming.exe', fingerprint: true
         }
