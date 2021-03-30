@@ -9,6 +9,7 @@ pipeline {
                         sh 'touch linux64'
                         sh 'mkdir -p build'
                         sh '$CC main.c -o build/gaming'
+                        sh 'ls build'
                     }
                 }
                 stage('build windows-x64') {
@@ -17,15 +18,21 @@ pipeline {
                         sh 'touch win64'
                         sh 'mkdir -p build'
                         sh '$CC main.c -o build/gaming.exe'
+                        sh 'ls build'
                     }
                 }
+            }
+        }
+        stage('why isnt it owrkingijgngn') {
+            agent any
+            steps {
+                sh 'ls build'
             }
         }
     }
 
     post {
         always {
-            sh 'ls'
             archiveArtifacts artifacts: 'build/gaming', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming.exe', fingerprint: true
         }
