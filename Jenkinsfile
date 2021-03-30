@@ -9,12 +9,11 @@ pipeline {
           }
     }
 
-    post {
-        agent any
-        always {
-            archiveArtifacts artifacts: 'gaming', fingerprint: true
-            deleteDir()
-        }
-    }
+//    post {
+//        always {
+//            archiveArtifacts artifacts: 'gaming', fingerprint: true
+//            deleteDir()
+//        }
+//    }
 }
 
