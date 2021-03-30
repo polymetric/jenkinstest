@@ -23,7 +23,8 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'build/gaming build/gaming.exe', fingerprint: true
+            archiveArtifacts artifacts: 'build/gaming', fingerprint: true
+            archiveArtifacts artifacts: 'build/gaming.exe', fingerprint: true
         }
     }
 }
