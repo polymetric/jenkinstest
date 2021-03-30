@@ -10,7 +10,7 @@ pipeline {
                     agent { docker { image 'dockcross/linux-x64' } }
                     steps {
                         sh 'mkdir -p build'
-                        sh '$CC main.c -o build/gaming'
+                        sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                     }
                 }
                 stage('build windows x64') {
@@ -20,7 +20,7 @@ pipeline {
                     agent { docker { image 'dockcross/windows-static-x64' } }
                     steps {
                         sh 'mkdir -p build'
-                        sh '$CC main.c -o build/gaming.exe'
+                        sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
                     }
                 }
                 stage('build linux arm64') {
@@ -30,7 +30,7 @@ pipeline {
                     agent { docker { image 'dockcross/linux-arm64' } }
                     steps {
                         sh 'mkdir -p build'
-                        sh '$CC main.c -o build/gaming'
+                        sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                     }
                 }
 //              stage('build mac x64') {
@@ -43,7 +43,7 @@ pipeline {
 //                  } }
 //                  steps {
 //                      sh 'mkdir -p build'
-//                      sh '$CC main.c -o build/gaming'
+//                      sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}"
 //                  }
 //              }
             }
@@ -53,8 +53,9 @@ pipeline {
     post {
         always {
             node(null) {
-                archiveArtifacts artifacts: 'build/gaming', fingerprint: true
-                archiveArtifacts artifacts: 'build/gaming.exe', fingerprint: true
+                archiveArtifacts artifacts: 'build/gaming_x86_64-unknown-linux-gnu', fingerprint: true
+                archiveArtifacts artifacts: 'build/gaming_aarch64-unknown-linux-gnu', fingerprint: true
+                archiveArtifacts artifacts: 'build/gaming_windows-x86_64.exe', fingerprint: true
             }
         }
     }
