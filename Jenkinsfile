@@ -25,9 +25,9 @@ pipeline {
                 }
                 stage('build linux arm64') {
                     environment {
-                        CROSS_TRIPLE='x86_64-apple-darwin'
+                        CROSS_TRIPLE='aarch64-unknown-linux-gnu'
                     }
-                    agent { docker { image 'dockcross/arm64' } }
+                    agent { docker { image 'dockcross/linux-arm64' } }
                     steps {
                         sh 'mkdir -p build'
                         sh '$CC main.c -o build/gaming'
