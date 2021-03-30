@@ -4,7 +4,7 @@ pipeline {
           stage('build linux-x64') {
               agent { docker { image 'dockcross/linux-x64' } }
               steps {
-                  sh 'echo beef gaming sdhshdshdshsdhdhsdhssdhhsdhDDDDDDDDDDD > gaming'
+                  sh 'echo beef gaming shiD > gaming'
               }
           }
     }
