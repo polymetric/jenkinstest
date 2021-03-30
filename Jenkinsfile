@@ -6,6 +6,7 @@ pipeline {
                 stage('build linux-x64') {
                     agent { docker { image 'dockcross/linux-x64' } }
                     steps {
+                        sh 'touch linux64'
                         sh 'mkdir -p build'
                         sh '$CC main.c -o build/gaming'
                     }
@@ -13,6 +14,7 @@ pipeline {
                 stage('build windows-x64') {
                     agent { docker { image 'dockcross/windows-static-x64' } }
                     steps {
+                        sh 'touch win64'
                         sh 'mkdir -p build'
                         sh '$CC main.c -o build/gaming.exe'
                     }
