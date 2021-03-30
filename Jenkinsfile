@@ -11,7 +11,6 @@ pipeline {
 
     post {
         always {
-            node { agent any }
             archiveArtifacts artifacts: 'gaming', fingerprint: true
             deleteDir()
         }
