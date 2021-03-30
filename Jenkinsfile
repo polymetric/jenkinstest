@@ -1,21 +1,29 @@
 pipeline {
-    agent none
+    agent any
     stages {
         stage('build') {
             parallel {
-                stage('build alpine stage 1') {
-                    agent { docker { image 'alpine' } }
+                stage('build linux-x64') {
+                    agent { docker { image 'dockcross/linux-x64' } }
                     steps {
-                        sh 'ls'
+                        sh 'mkdir -p build'
+                        sh 'cc main.c -o build/gaming'
                     }
                 }
-                stage('build debian stage 2') {
-                    agent { docker { image 'debian' } }
+                stage('build windows-x64') {
+                    agent { docker { image 'dockcross/windows-static-x64' } }
                     steps {
-                        sh 'ls'
+                        sh 'mkdir -p build'
+                        sh 'cc main.c -o build/gaming.exe'
                     }
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'build/gaming', fingerprint: true
         }
     }
 }
