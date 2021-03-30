@@ -1,10 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
-            parallel {
+//        stage('build') {
+//            parallel {
                 stage('build linux-x64') {
-                    agent { docker { image 'dockcross/linux-x64' } }
+//                    agent { docker { image 'dockcross/linux-x64' } }
                     steps {
                         sh 'touch linux64'
                         sh 'mkdir -p build'
@@ -21,8 +21,8 @@ pipeline {
 //                        sh 'ls build'
 //                    }
 //                }
-            }
-        }
+//            }
+//        }
         stage('why isnt it owrkingijgngn') {
             agent any
             steps {
