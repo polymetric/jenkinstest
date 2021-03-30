@@ -1,7 +1,6 @@
 pipeline {
     agent any
     stages {
-        agent none
         stage('build linux-x64') {
             agent { docker { image 'dockcross/linux-x64' } }
             steps {
