@@ -2,4 +2,5 @@
 
 int main() {
     printf("epic gaming mode activated\n");
+    getchar();
 }
