@@ -6,7 +6,8 @@ pipeline {
           stage('build linux-x64') {
 //              agent { docker { image 'dockcross/linux-x64' } }
               steps {
-                  sh 'echo beef gaming > build/gaming'
+                  sh 'mkdir -p build/'
+                  sh 'echo beef gaming 23786223401827381273812 > build/gaming'
               }
           }
 //                stage('build windows-x64') {
