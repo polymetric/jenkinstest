@@ -11,13 +11,9 @@ pipeline {
 
     post {
         always {
-            node {
-                agent any
-                step {
-                    archiveArtifacts artifacts: 'gaming', fingerprint: true
-                    deleteDir()
-                }
-            }
+            node { agent any }
+            archiveArtifacts artifacts: 'gaming', fingerprint: true
+            deleteDir()
         }
     }
 }
