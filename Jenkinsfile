@@ -1,10 +1,29 @@
 pipeline {
     agent none
     stages {
-        stage('buildy mcbuildscript') {
-            agent { docker { image 'alpine' } }
-            steps {
-                sh 'echo 9e0ee0ee00ee0e00e00e > gaming'
+        stage('build') {
+            parallel {
+                stage('build linux-x64') {
+                    agent { docker { image 'dockcross/linux-x64' } }
+                    steps {
+                        sh 'mkdir -p build'
+                        sh '$CC main.c -o build/gaming'
+                    }
+                }
+                stage('build arm64') {
+                    agent { docker { image 'dockcross/windows-static-x64' } }
+                    steps {
+                        sh 'mkdir -p build'
+                        sh '$CC main.c -o build/gaming.exe'
+                    }
+                }
+                stage('build windows-x64') {
+                    agent { docker { image 'dockcross/arm64' } }
+                    steps {
+                        sh 'mkdir -p build'
+                        sh '$CC main.c -o build/gaming.exe'
+                    }
+                }
             }
         }
     }
@@ -12,8 +31,8 @@ pipeline {
     post {
         always {
             node(null) {
-                archiveArtifacts artifacts: 'gaming', fingerprint: true
-                deleteDir()
+                archiveArtifacts artifacts: 'build/gaming', fingerprint: true
+                archiveArtifacts artifacts: 'build/gaming.exe', fingerprint: true
             }
         }
     }
