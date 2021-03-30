@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('build linux-x64') {
             agent { docker { image 'dockcross/linux-x64' } }
@@ -11,6 +11,7 @@ pipeline {
 
     post {
         always {
+            agent any
             archiveArtifacts artifacts: 'gaming', fingerprint: true
             deleteDir()
         }
