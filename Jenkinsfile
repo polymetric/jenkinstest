@@ -4,10 +4,10 @@ pipeline {
 //        stage('build') {
 //            parallel {
           stage('build linux-x64') {
-//              agent { docker { image 'dockcross/linux-x64' } }
+              agent { docker { image 'dockcross/linux-x64' } }
               steps {
                   sh 'mkdir -p build/'
-                  sh 'echo beef gaming 723ry823hcrhwecrhwchreuiwr > build/gaming'
+                  sh 'echo beef gaming 48723947x84uaxeajxkdsdkxskldssdsjsdk > build/gaming'
               }
           }
 //                stage('build windows-x64') {
