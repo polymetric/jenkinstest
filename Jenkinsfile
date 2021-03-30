@@ -4,6 +4,9 @@ pipeline {
         stage('build') {
             parallel {
                 stage('build linux x64') {
+                    environment {
+                        CROSS_TRIPLE='x86_64-unknown-linux-gnu'
+                    }
                     agent { docker { image 'dockcross/linux-x64' } }
                     steps {
                         sh 'mkdir -p build'
@@ -11,6 +14,9 @@ pipeline {
                     }
                 }
                 stage('build windows x64') {
+                    environment {
+                        CROSS_TRIPLE='windows-x86_64'
+                    }
                     agent { docker { image 'dockcross/windows-static-x64' } }
                     steps {
                         sh 'mkdir -p build'
@@ -18,25 +24,28 @@ pipeline {
                     }
                 }
                 stage('build linux arm64') {
+                    environment {
+                        CROSS_TRIPLE='x86_64-apple-darwin'
+                    }
                     agent { docker { image 'dockcross/arm64' } }
                     steps {
                         sh 'mkdir -p build'
                         sh '$CC main.c -o build/gaming'
                     }
                 }
-                stage('build mac x64') {
-                    environment {
-                        CROSS_TRIPLE='x86_64-apple-darwin'
-                    }
-                    agent { docker {
-                        image 'multiarch/crossbuild'
-                        args "-e CROSS_TRIPLE=${CROSS_TRIPLE}"
-                    } }
-                    steps {
-                        sh 'mkdir -p build'
-                        sh '$CC main.c -o build/gaming'
-                    }
-                }
+//              stage('build mac x64') {
+//                  environment {
+//                      CROSS_TRIPLE='x86_64-apple-darwin'
+//                  }
+//                  agent { docker {
+//                      image 'multiarch/crossbuild'
+//                      args "-e CROSS_TRIPLE=${CROSS_TRIPLE}"
+//                  } }
+//                  steps {
+//                      sh 'mkdir -p build'
+//                      sh '$CC main.c -o build/gaming'
+//                  }
+//              }
             }
         }
     }
