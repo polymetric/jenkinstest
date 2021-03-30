@@ -10,7 +10,7 @@ pipeline {
                     agent { docker { image 'dockcross/linux-x64' } }
                     steps {
                         sh 'mkdir -p build'
-                        sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}"
+                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                     }
                 }
                 stage('build windows x64') {
@@ -20,7 +20,7 @@ pipeline {
                     agent { docker { image 'dockcross/windows-static-x64' } }
                     steps {
                         sh 'mkdir -p build'
-                        sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
+                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
                     }
                 }
                 stage('build linux arm64') {
@@ -30,7 +30,7 @@ pipeline {
                     agent { docker { image 'dockcross/linux-arm64' } }
                     steps {
                         sh 'mkdir -p build'
-                        sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}"
+                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                     }
                 }
 //              stage('build mac x64') {
@@ -43,7 +43,7 @@ pipeline {
 //                  } }
 //                  steps {
 //                      sh 'mkdir -p build'
-//                      sh "$CC main.c -o build/gaming_${CROSS_TRIPLE}"
+//                      sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
 //                  }
 //              }
             }
