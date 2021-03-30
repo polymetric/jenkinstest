@@ -1,8 +1,8 @@
 pipeline {
     agent any
     stages {
-        stage('build linux-x64') {
-            agent { docker { image 'dockcross/linux-x64' } }
+        stage('buildy mcbuildscript') {
+            agent { docker { image 'alpine' } }
             steps {
                 sh 'echo ddhfjfhjfhjhjhjhjhjhjhjh > gaming'
             }
