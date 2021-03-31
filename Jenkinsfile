@@ -21,16 +21,16 @@ pipeline {
                         sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
                     } } }
                 }
-//              stage('build linux arm64') {
-//                  environment {
-//                      CROSS_TRIPLE='aarch64-unknown-linux-gnu'
-//                  }
-//                  agent { docker { image 'dockcross/linux-arm64' } }
-//                  steps {
-//                      sh 'mkdir -p build'
-//                      sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
-//                  }
-//              }
+                stage('build linux arm64') {
+                    environment {
+                        CROSS_TRIPLE='aarch64-unknown-linux-gnu'
+                    }
+                    steps { script { docker.image('dockcross/linux-arm64').inside {
+                    steps {
+                        sh 'mkdir -p build'
+                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
+                    } } }
+                }
 //              stage('build mac x64') {
 //                  environment {
 //                      CROSS_TRIPLE='x86_64-apple-darwin'
