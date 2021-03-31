@@ -36,7 +36,7 @@ pipeline {
                     }
                     steps { script { docker.image('multiarch/crossbuild').inside('-e CROSS_TRIPLE=x86_64-apple-darwin') {
                         sh 'mkdir -p build'
-                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
+                        sh "cc main.c -o build/gaming_${CROSS_TRIPLE}"
                     } } }
                 }
             }
