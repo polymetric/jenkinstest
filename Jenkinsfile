@@ -26,7 +26,6 @@ pipeline {
                         CROSS_TRIPLE='aarch64-unknown-linux-gnu'
                     }
                     steps { script { docker.image('dockcross/linux-arm64').inside {
-                    steps {
                         sh 'mkdir -p build'
                         sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                     } } }
