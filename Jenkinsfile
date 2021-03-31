@@ -34,14 +34,10 @@ pipeline {
                     environment {
                         CROSS_TRIPLE='x86_64-apple-darwin'
                     }
-                    agent { docker {
-                        image 'multiarch/crossbuild'
-                        args "-e CROSS_TRIPLE=${CROSS_TRIPLE}"
-                    } }
-                    steps {
+                    steps { script { docker.image('multiarch/crossbuild').withRun('-e CROSS_TRIPLE=${CROSS_TRIPLE}').inside {
                         sh 'mkdir -p build'
                         sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
-                    }
+                    } } }
                 }
             }
         }
