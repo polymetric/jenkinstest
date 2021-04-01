@@ -8,8 +8,7 @@ pipeline {
                         CROSS_TRIPLE='x86_64-unknown-linux-gnu'
                     }
                     steps { script { docker.image('dockcross/linux-x64').inside {
-                        sh 'mkdir -p build'
-                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
+                        sh "./build.sh gaming_${CROSS_TRIPLE}"
                     } } }
                 }
                 stage('build windows x64') {
@@ -17,8 +16,7 @@ pipeline {
                         CROSS_TRIPLE='windows-x86_64'
                     }
                     steps { script { docker.image('dockcross/windows-static-x64').inside {
-                        sh 'mkdir -p build'
-                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
+                        sh "./build.sh gaming_${CROSS_TRIPLE}"
                     } } }
                 }
                 stage('build linux arm64') {
@@ -26,8 +24,7 @@ pipeline {
                         CROSS_TRIPLE='aarch64-unknown-linux-gnu'
                     }
                     steps { script { docker.image('dockcross/linux-arm64').inside {
-                        sh 'mkdir -p build'
-                        sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
+                        sh "./build.sh gaming_${CROSS_TRIPLE}"
                     } } }
                 }
                 stage('build mac x64') {
@@ -35,8 +32,7 @@ pipeline {
                         CROSS_TRIPLE='x86_64-apple-darwin'
                     }
                     steps { script { docker.image('multiarch/crossbuild').inside("-e CROSS_TRIPLE=${CROSS_TRIPLE}") {
-                        sh 'mkdir -p build'
-                        sh "cc main.c -o build/gaming_${CROSS_TRIPLE}"
+                        sh "./build.sh gaming_${CROSS_TRIPLE}"
                     } } }
                 }
             }
