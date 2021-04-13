@@ -15,7 +15,7 @@ pipeline {
         stage('build windows x64') {
             environment {
                 CROSS_TRIPLE='windows-x86_64'
-            n}
+            }
             steps { catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                 script { docker.image('dockcross/windows-x64').inside {
                     sh 'mkdir -p build'
