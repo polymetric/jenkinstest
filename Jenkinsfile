@@ -17,7 +17,7 @@ pipeline {
                 CROSS_TRIPLE='windows-x86_64'
             }
             steps { catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                script { docker.image('dockcross/windows-x64').inside {
+                script { docker.image('dockcross/windows-static-x64').inside {
                     sh 'mkdir -p build'
                     sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
                 } }
