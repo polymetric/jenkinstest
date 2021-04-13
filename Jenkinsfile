@@ -1,8 +1,8 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
-            parallel {
+//      stage('build') {
+//          parallel {
                 stage('build linux x64') {
                     environment {
                         CROSS_TRIPLE='x86_64-unknown-linux-gnu'
@@ -39,8 +39,8 @@ pipeline {
                         sh "cc main.c -o build/gaming_${CROSS_TRIPLE}"
                     } } }
                 }
-            }
-        }
+//          }
+//      }
     }
 
     post {
