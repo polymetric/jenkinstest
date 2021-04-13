@@ -24,6 +24,8 @@ pipeline {
                         CROSS_TRIPLE='aarch64-unknown-linux-gnu'
                     }
                     steps { script { docker.image('dockcross/linux-arm64').inside {
+                        echo "PRINTING ENVIRONMENT DEBUG"
+                        sh "env"
                         sh "./build.sh gaming_${CROSS_TRIPLE}"
                     } } }
                 }
@@ -35,9 +37,9 @@ pipeline {
                         sh "./build.sh gaming_${CROSS_TRIPLE}"
                     } } }
                 }
-            }
+//          }
 //      }
-//  }
+    }
 
     post {
         always {
