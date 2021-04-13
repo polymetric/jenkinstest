@@ -18,6 +18,8 @@ pipeline {
             }
             steps { catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                 script { docker.image('dockcross/windows-static-x64').inside {
+                    echo 'this should fail'
+                    sh 'return 1'
                     sh 'mkdir -p build'
                     sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
                 } }
