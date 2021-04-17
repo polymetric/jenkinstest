@@ -46,6 +46,7 @@ pipeline {
     post {
         always {
             unstash 'builtExecutables'
+            sh 'tree'
             archiveArtifacts artifacts: 'build/gaming_x86_64-unknown-linux-gnu', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming_windows-x86_64.exe', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming_aarch64-unknown-linux-gnu', fingerprint: true
