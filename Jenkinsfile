@@ -61,10 +61,12 @@ pipeline {
             unstash 'bin windows x64'
             unstash 'bin linux arm64'
             unstash 'bin mac x64'
+            unstash 'package'
             archiveArtifacts artifacts: 'build/gaming_x86_64-unknown-linux-gnu', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming_windows-x86_64.exe', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming_aarch64-unknown-linux-gnu', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming_x86_64-apple-darwin', fingerprint: true
+            archiveArtifacts artifacts: 'gaming.tar.xz', fingerprint: true
             deleteDir()
         }
     }
