@@ -43,10 +43,10 @@ pipeline {
                 CROSS_TRIPLE='x86_64-apple-darwin'
             }
             steps { 
-                sh '/usr/bin/crossbuild'
-                sh 'mkdir -p build'
-                sh 'cc --version'
-                sh "cc main.c -o build/gaming_${CROSS_TRIPLE}"
+                bash '/usr/bin/crossbuild'
+                bash 'mkdir -p build'
+                bash 'cc --version'
+                bash "cc main.c -o build/gaming_${CROSS_TRIPLE}"
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin mac x64'
             }
         }
