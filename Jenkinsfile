@@ -8,6 +8,7 @@ pipeline {
             }
             steps { 
                 sh 'mkdir -p build'
+                sh 'cc --version'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin linux x64'
             }
@@ -18,6 +19,7 @@ pipeline {
             }
             steps { script { docker.image('dockcross/windows-static-x64').inside {
                 sh 'mkdir -p build'
+                sh 'cc --version'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
                 stash includes: "build/gaming_${CROSS_TRIPLE}.exe", name: 'bin windows x64'
             } } }
@@ -28,6 +30,7 @@ pipeline {
             }
             steps { script { docker.image('dockcross/linux-arm64').inside {
                 sh 'mkdir -p build'
+                sh 'cc --version'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin linux arm64'
             } } }
@@ -38,6 +41,7 @@ pipeline {
             }
             steps { script { docker.image('multiarch/crossbuild').inside("-e CROSS_TRIPLE=${CROSS_TRIPLE}") {
                 sh 'mkdir -p build'
+                sh 'cc --version'
                 sh "cc main.c -o build/gaming_${CROSS_TRIPLE}"
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin mac x64'
             } } }
