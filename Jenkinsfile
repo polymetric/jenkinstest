@@ -19,7 +19,7 @@ pipeline {
             steps { script { docker.image('dockcross/windows-static-x64').inside {
                 sh 'mkdir -p build'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
-                stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin windows x64'
+                stash includes: "build/gaming_${CROSS_TRIPLE}.exe", name: 'bin windows x64'
             } } }
         }
         stage('build linux arm64') {
