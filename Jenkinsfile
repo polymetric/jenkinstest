@@ -40,6 +40,7 @@ pipeline {
                 CROSS_TRIPLE='x86_64-apple-darwin'
             }
             steps { script { docker.image('multiarch/crossbuild').inside("-e CROSS_TRIPLE=${CROSS_TRIPLE}") {
+                sh '/usr/bin/crossbuild'
                 sh 'mkdir -p build'
                 sh 'cc --version'
                 sh "cc main.c -o build/gaming_${CROSS_TRIPLE}"
