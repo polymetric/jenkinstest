@@ -43,7 +43,7 @@ pipeline {
             } } }
         }
         stage('package') {
-            agent { docker { image 'debian' } }
+//          agent { docker { image 'debian' } }
             steps {
                 unstash 'bin linux x64'
                 unstash 'bin windows x64'
