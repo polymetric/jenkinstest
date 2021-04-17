@@ -43,7 +43,7 @@ pipeline {
             } } }
         }
         stage('package') {
-            agent { docker { image 'alpine' } }
+//          agent { docker { image 'alpine' } }
             steps {
                 unstash 'bin linux x64'
                 unstash 'bin windows x64'
