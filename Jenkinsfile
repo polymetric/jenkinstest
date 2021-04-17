@@ -42,6 +42,16 @@ pipeline {
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin mac x64', allowEmpty: true
             } } }
         }
+        stage('package') {
+            agent { docker { image 'debian' } }
+            steps {
+                unstash 'bin linux x64'
+                unstash 'bin windows x64'
+                unstash 'bin linux arm64'
+                unstash 'bin mac x64'
+                sh 'tar cJvf gaming build/*'
+            }
+        }
     }
 
     post {
