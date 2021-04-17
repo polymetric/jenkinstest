@@ -8,7 +8,7 @@ pipeline {
             }
             steps { 
                 sh 'mkdir -p build'
-                sh 'cc --version'
+                sh '\$CC --version'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin linux x64'
             }
@@ -20,7 +20,7 @@ pipeline {
             }
             steps {
                 sh 'mkdir -p build'
-                sh 'cc --version'
+                sh '\$CC --version'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
                 stash includes: "build/gaming_${CROSS_TRIPLE}.exe", name: 'bin windows x64'
             }
@@ -32,7 +32,7 @@ pipeline {
             }
             steps {
                 sh 'mkdir -p build'
-                sh 'cc --version'
+                sh '\$CC --version'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin linux arm64'
             }
@@ -41,12 +41,13 @@ pipeline {
             agent { docker { image 'multiarch/crossbuild' } }
             environment {
                 CROSS_TRIPLE='x86_64-apple-darwin'
+                CROSSBUILD='/usr/bin/crossbuild'
+                CC="${CROSSBUILD} cc"
             }
             steps { 
-                bash '/usr/bin/crossbuild'
-                bash 'mkdir -p build'
-                bash 'cc --version'
-                bash "cc main.c -o build/gaming_${CROSS_TRIPLE}"
+                sh 'mkdir -p build'
+                sh '\$CC --version'
+                sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
                 stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'bin mac x64'
             }
         }
