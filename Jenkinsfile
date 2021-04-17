@@ -9,7 +9,7 @@ pipeline {
             steps { 
                 sh 'mkdir -p build'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
-                stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'builtExecutables', allowEmpty: true
+                stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'executable linux x64', allowEmpty: true
             }
         }
         stage('build windows x64') {
@@ -19,7 +19,7 @@ pipeline {
             steps { script { docker.image('dockcross/windows-static-x64').inside {
                 sh 'mkdir -p build'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}.exe"
-                stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'builtExecutables', allowEmpty: true
+                stash includes: "build/gaming_${CROSS_TRIPLE}", name: 'executable windows x64', allowEmpty: true
             } } }
         }
 //      stage('build linux arm64') {
@@ -46,7 +46,8 @@ pipeline {
 
     post {
         always {
-            unstash 'builtExecutables'
+            unstash 'executable linux x64'
+            unstash 'executable windows x64'
             sh 'tree'
             archiveArtifacts artifacts: 'build/gaming_x86_64-unknown-linux-gnu', fingerprint: true
             archiveArtifacts artifacts: 'build/gaming_windows-x86_64.exe', fingerprint: true
