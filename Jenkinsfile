@@ -7,6 +7,11 @@ pipeline {
                 CROSS_TRIPLE='x86_64-unknown-linux-gnu'
             }
             steps { 
+                sh 'set -eux'
+                sh "echo beef"
+                sh "lscpu | grep -E '^CPU\(s\):' | awk '{print \$2}'
+                sh "lscpu | grep -E '^CPU\\(s\\):' | awk '{print \$2}'
+                sh "lscpu | grep -E '^CPU\\\(s\\\):' | awk '{print \$2}'
                 sh 'mkdir -p build'
                 sh '\$CC --version'
                 sh "\$CC main.c -o build/gaming_${CROSS_TRIPLE}"
