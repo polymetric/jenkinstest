@@ -5,12 +5,15 @@ pipeline {
             agent { docker { image 'dockcross/linux-x64' } }
             environment {
                 CROSS_TRIPLE='x86_64-unknown-linux-gnu'
+                NUM_CPUS="""${sh(
+                    script: "export NUM_CPUS=\$(lscpu | grep -E '^CPU\\(s\\):' | awk '{print \$2}')
+                )}"""
             }
             steps { 
                 sh 'set -eux'
-                sh "export NUM_CPUS=\$(lscpu | grep -E '^CPU\\(s\\):' | awk '{print \$2}')"
-                sh 'echo $NUM_CPUS'
-                sh 'echo \$NUM_CPUS'
+
+                sh "echo ${NUM_CPUS}"
+                sh 'env'
                 sh 'set'
 
                 sh 'mkdir -p build'
