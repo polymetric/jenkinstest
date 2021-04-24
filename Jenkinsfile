@@ -9,7 +9,6 @@ pipeline {
             steps { 
                 sh 'set -eux'
                 sh "echo beef"
-                sh "lscpu | grep -E '^CPU\(s\):' | awk '{print \$2}'
                 sh "lscpu | grep -E '^CPU\\(s\\):' | awk '{print \$2}'
                 sh "lscpu | grep -E '^CPU\\\(s\\\):' | awk '{print \$2}'
                 sh 'mkdir -p build'
