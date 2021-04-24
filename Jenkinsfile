@@ -12,7 +12,7 @@ pipeline {
                 sh 'echo $NUM_CPUS'
                 sh 'echo \$NUM_CPUS'
                 sh 'echo \\$NUM_CPUS'
-                sh 'declare -p'
+                sh 'set'
 
                 sh 'mkdir -p build'
                 sh '\$CC --version'
