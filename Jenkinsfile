@@ -7,7 +7,7 @@ pipeline {
                 CROSS_TRIPLE='x86_64-unknown-linux-gnu'
                 NUM_CPUS="""${sh(
                     returnStdout: true,
-                    script: "export NUM_CPUS=\$(lscpu | grep -E '^CPU\\(s\\):' | awk '{print \$2}')"
+                    script: "lscpu | grep -E '^CPU\\(s\\):' | awk '{print \$2}'"
                 )}"""
             }
             steps { 
